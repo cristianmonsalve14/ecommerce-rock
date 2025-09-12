@@ -1,0 +1,223 @@
+
+/* --- NAVBAR --- */
+.navbar {
+    background-color: #1c1c1c;
+    padding: 15px 0;
+}
+.navbar-brand {
+    font-family: 'Rock Salt', cursive;
+    font-size: 30px;
+    color: #f39c12 !important;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+}
+.navbar-brand img {
+    margin-right: 10px;
+}
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+    background-color: #f39c12;
+    color: #fff;
+    border-radius: 5px;
+}
+.navbar-toggler {
+    border-color: #f39c12;
+}
+.navbar-toggler-icon {
+    background-color: #f39c12;
+}
+#cart-count {
+    margin-left: 5px;
+    font-weight: bold;
+    background: #fff;
+    color: #f39c12;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 14px;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    background: url('../img/hero-rock.jpg') center/cover no-repeat;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.hero .container {
+    background: rgba(28, 28, 28, 0.8);
+    padding: 40px 20px;
+    border-radius: 12px;
+}
+.hero h1 {
+    font-family: 'Rock Salt', cursive;
+    color: #f39c12;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+.hero .lead {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+}
+.hero .btn-warning {
+    font-size: 1.2rem;
+    padding: 12px 32px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+/* --- PRODUCTOS --- */
+.product-card {
+    background: #232323;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 10px;
+    transition: transform 0.2s;
+    min-height: 100%;
+}
+.product-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 6px 24px rgba(243, 156, 18, 0.15);
+}
+.product-card img {
+    width: 100%;
+    max-width: 120px;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+    margin: 0 auto;
+}
+.product-card .card-body {
+    padding: 15px;
+}
+.product-card .btn-warning {
+    background: #f39c12;
+    border: none;
+    color: #232323;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background 0.2s;
+}
+.product-card .btn-warning:hover {
+    background: #fff;
+    color: #f39c12;
+    border: 1px solid #f39c12;
+}
+
+/* --- BLOG --- */
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+.card-title {
+    color: #f39c12;
+    font-family: 'Rock Salt', cursive;
+}
+.card-text a {
+    color: #f39c12;
+    text-decoration: underline;
+}
+.card-text a:hover {
+    color: #fff;
+    background: #f39c12;
+    border-radius: 4px;
+    padding: 2px 6px;
+}
+
+/* --- FOOTER --- */
+footer {
+    background: #1c1c1c;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+    .product-card img {
+        max-width: 100px;
+    }
+}
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .product-card img {
+        max-width: 80px;
+    }
+    .card-img-top {
+        height: 120px;
+    }
+}
+@media (max-width: 576px) {
+    .hero .container {
+        padding: 20px 5px;
+    }
+    .product-card .card-body {
+        padding: 10px;
+    }
+}
+
+/* Asaid*/
+aside h3 {
+    color: #f39c12;
+    font-family: 'Rock Salt', cursive;
+}
+@media (max-width: 991px) {
+    aside {
+        margin-top: 40px;
+    }
+}
+
+/* Footer Pro */
+  .footer-pro {
+    background: linear-gradient(135deg, #1c1c1c, #111111);
+    color: #fff;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 10;
+  }
+
+  .footer-pro .social-icon img {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .footer-pro .social-icon:hover img {
+    transform: translateY(-5px) scale(1.2) rotate(-10deg);
+    filter: brightness(1.5);
+  }
+
+  .footer-pro p {
+    margin: 0;
+  }
+
+  /* Efecto flotante al pasar sobre todo el footer */
+  .footer-pro:hover {
+    transform: translateY(-3px);
+    transition: transform 0.3s ease;
+  }
+
+  @media (max-width: 576px) {
+    .footer-pro .social-icon img {
+      width: 30px;
+      height: 30px;
+    }
+  }
