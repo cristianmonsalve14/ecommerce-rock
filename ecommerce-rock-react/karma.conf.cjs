@@ -39,7 +39,7 @@ module.exports = function(config) {
       type: 'html',
       dir: 'coverage/'
     },
-    browsers: ['ChromeHeadless'],
+    browsers: ['Chrome'],
     singleRun: false,
     restartOnFileChange: true
   });
