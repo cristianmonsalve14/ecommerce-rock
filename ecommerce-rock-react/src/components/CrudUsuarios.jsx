@@ -1,54 +1,80 @@
-import React, { useState } from 'react';
-
-const usuariosIniciales = [
-  {
-    id: 1,
-    run: "19011022K",
-    nombre: "Juan",
-    apellidos: "Pérez Soto",
-    correo: "juan@duoc.cl",
-    tipo: "Cliente"
-  },
-  {
-    id: 2,
-    run: "20123456K",
-    nombre: "Ana",
-    apellidos: "Gómez Ruiz",
-    correo: "ana@gmail.com",
-    tipo: "Administrador"
-  }
-];
+import React, { useState, useEffect } from 'react';
+import {
+  getUsuarios,
+  addUsuario,
+  updateUsuario,
+  deleteUsuario
+} from '../data/dataUsuarios';
 
 function CrudUsuarios() {
-  const [usuarios, setUsuarios] = useState(usuariosIniciales);
+  const [usuarios, setUsuarios] = useState([]);
   const [nuevo, setNuevo] = useState({ run: '', nombre: '', apellidos: '', correo: '', tipo: 'Cliente' });
   const [editando, setEditando] = useState(null);
+  const [mensaje, setMensaje] = useState('');
+  const [error, setError] = useState('');
+
+  // Cargar usuarios al montar el componente
+  useEffect(() => {
+    setUsuarios(getUsuarios());
+  }, []);
 
   // Crear usuario
-  const handleNuevoChange = e => setNuevo({ ...nuevo, [e.target.name]: e.target.value });
+  const handleNuevoChange = e => {
+    setNuevo({ ...nuevo, [e.target.name]: e.target.value });
+    setError('');
+    setMensaje('');
+  };
   const handleAgregar = e => {
     e.preventDefault();
-    setUsuarios([...usuarios, { ...nuevo, id: Date.now() }]);
+    if (!nuevo.run || !nuevo.nombre || !nuevo.apellidos || !nuevo.correo) {
+      setError('Completa todos los campos obligatorios.');
+      return;
+    }
+    if (usuarios.some(u => u.run === nuevo.run)) {
+      setError('Ya existe un usuario con ese RUN.');
+      return;
+    }
+    const nuevosUsuarios = addUsuario({ ...nuevo });
+    setUsuarios(nuevosUsuarios);
     setNuevo({ run: '', nombre: '', apellidos: '', correo: '', tipo: 'Cliente' });
+    setMensaje('Usuario agregado exitosamente.');
   };
 
   // Editar usuario
-  const handleEditar = usuario => setEditando(usuario);
+  const handleEditar = usuario => {
+    setEditando(usuario);
+    setMensaje('');
+    setError('');
+  };
   const handleEditChange = e => setEditando({ ...editando, [e.target.name]: e.target.value });
   const handleGuardar = e => {
     e.preventDefault();
-    setUsuarios(usuarios.map(u => u.id === editando.id ? editando : u));
+    if (!editando.run || !editando.nombre || !editando.apellidos || !editando.correo) {
+      setError('Completa todos los campos obligatorios.');
+      return;
+    }
+    const nuevosUsuarios = updateUsuario(editando);
+    setUsuarios(nuevosUsuarios);
     setEditando(null);
+    setMensaje('Usuario actualizado.');
   };
 
   // Eliminar usuario
-  const handleEliminar = id => setUsuarios(usuarios.filter(u => u.id !== id));
+  const handleEliminar = id => {
+    if (window.confirm('¿Seguro que deseas eliminar este usuario?')) {
+      const nuevosUsuarios = deleteUsuario(id);
+      setUsuarios(nuevosUsuarios);
+      setMensaje('Usuario eliminado.');
+    }
+  };
 
   return (
     <div>
       <h3>Listado de Usuarios</h3>
-      <table className="table table-striped">
-        <thead>
+      {mensaje && <div className="alert alert-success">{mensaje}</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
+      <table className="table table-striped table-bordered align-middle">
+        <thead className="table-dark">
           <tr>
             <th>RUN</th>
             <th>Nombre</th>
@@ -74,67 +100,31 @@ function CrudUsuarios() {
           ))}
         </tbody>
       </table>
-
-      {/* Formulario para agregar nuevo usuario */}
-      <h4>Agregar Nuevo Usuario</h4>
-      <form className="mb-4" onSubmit={handleAgregar}>
-        <div className="row g-2">
-          <div className="col">
-            <input type="text" className="form-control" name="run" placeholder="RUN" value={nuevo.run} onChange={handleNuevoChange} required minLength={7} maxLength={9} />
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" name="nombre" placeholder="Nombre" value={nuevo.nombre} onChange={handleNuevoChange} required maxLength={50} />
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" name="apellidos" placeholder="Apellidos" value={nuevo.apellidos} onChange={handleNuevoChange} required maxLength={100} />
-          </div>
-          <div className="col">
-            <input type="email" className="form-control" name="correo" placeholder="Correo" value={nuevo.correo} onChange={handleNuevoChange} required maxLength={100} />
-          </div>
-          <div className="col">
-            <select className="form-select" name="tipo" value={nuevo.tipo} onChange={handleNuevoChange}>
-              <option value="Administrador">Administrador</option>
-              <option value="Cliente">Cliente</option>
-              <option value="Vendedor">Vendedor</option>
-            </select>
-          </div>
-          <div className="col-auto">
-            <button type="submit" className="btn btn-success">Agregar</button>
-          </div>
+      <h4 className="mt-4">{editando ? 'Editar Usuario' : 'Agregar Nuevo Usuario'}</h4>
+      <form className="mb-4 row g-2" onSubmit={editando ? handleGuardar : handleAgregar}>
+        <div className="col-md-2">
+          <input type="text" className="form-control" name="run" placeholder="RUN" value={editando ? editando.run : nuevo.run} onChange={editando ? handleEditChange : handleNuevoChange} required minLength={7} maxLength={9} />
+        </div>
+        <div className="col-md-2">
+          <input type="text" className="form-control" name="nombre" placeholder="Nombre" value={editando ? editando.nombre : nuevo.nombre} onChange={editando ? handleEditChange : handleNuevoChange} required />
+        </div>
+        <div className="col-md-2">
+          <input type="text" className="form-control" name="apellidos" placeholder="Apellidos" value={editando ? editando.apellidos : nuevo.apellidos} onChange={editando ? handleEditChange : handleNuevoChange} required />
+        </div>
+        <div className="col-md-3">
+          <input type="email" className="form-control" name="correo" placeholder="Correo" value={editando ? editando.correo : nuevo.correo} onChange={editando ? handleEditChange : handleNuevoChange} required />
+        </div>
+        <div className="col-md-2">
+          <select className="form-select" name="tipo" value={editando ? editando.tipo : nuevo.tipo} onChange={editando ? handleEditChange : handleNuevoChange}>
+            <option value="Cliente">Cliente</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+        <div className="col-12 mt-2">
+          <button type="submit" className="btn btn-success me-2">{editando ? 'Guardar' : 'Agregar'}</button>
+          {editando && <button type="button" className="btn btn-secondary" onClick={() => setEditando(null)}>Cancelar</button>}
         </div>
       </form>
-
-      {/* Formulario para editar usuario */}
-      {editando && (
-        <form className="mb-4" onSubmit={handleGuardar}>
-          <h4>Editar Usuario</h4>
-          <div className="row g-2">
-            <div className="col">
-              <input type="text" className="form-control" name="run" value={editando.run} onChange={handleEditChange} required minLength={7} maxLength={9} />
-            </div>
-            <div className="col">
-              <input type="text" className="form-control" name="nombre" value={editando.nombre} onChange={handleEditChange} required maxLength={50} />
-            </div>
-            <div className="col">
-              <input type="text" className="form-control" name="apellidos" value={editando.apellidos} onChange={handleEditChange} required maxLength={100} />
-            </div>
-            <div className="col">
-              <input type="email" className="form-control" name="correo" value={editando.correo} onChange={handleEditChange} required maxLength={100} />
-            </div>
-            <div className="col">
-              <select className="form-select" name="tipo" value={editando.tipo} onChange={handleEditChange}>
-                <option value="Administrador">Administrador</option>
-                <option value="Cliente">Cliente</option>
-                <option value="Vendedor">Vendedor</option>
-              </select>
-            </div>
-            <div className="col-auto">
-              <button type="submit" className="btn btn-primary">Guardar</button>
-              <button type="button" className="btn btn-secondary ms-2" onClick={() => setEditando(null)}>Cancelar</button>
-            </div>
-          </div>
-        </form>
-      )}
     </div>
   );
 }

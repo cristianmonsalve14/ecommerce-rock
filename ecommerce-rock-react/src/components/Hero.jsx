@@ -1,13 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './Hero.css';
 
 function Hero() {
   return (
-    <section className="hero bg-dark text-white text-center py-5">
-      <div className="container">
-        <h1 className="display-4">Bienvenido a Poleras de Rock</h1>
-        <p className="lead">Las mejores poleras para los verdaderos fans del rock</p>
-        <a href="#catalogo" className="btn btn-warning btn-lg">Ver Catálogo</a>
-      </div>
+    <section className="hero">
+      <div className="hero-catalogo-badge">🔥 Lo más vendido</div>
+      <p>Las mejores poleras para los verdaderos fans del rock</p>
+      <Link to="/catalogo" className="btn hero-catalogo-btn">
+        <span>¡Descubre tu polera ideal!</span>
+        <img src="/img/guitarra.jpg" alt="Guitarra" className="hero-catalogo-guitar" />
+      </Link>
+      <div className="hero-catalogo-subtext">Más de 50 diseños exclusivos · Nuevas bandas cada semana</div>
     </section>
   );
 }

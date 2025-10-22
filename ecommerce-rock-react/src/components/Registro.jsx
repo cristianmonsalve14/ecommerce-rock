@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Registro.css';
 
 function Registro() {
   const [form, setForm] = useState({ nombre: '', apellidos: '', correo: '', password: '' });
@@ -39,30 +40,30 @@ function Registro() {
   };
 
   return (
-    <section className="container py-5">
-      <h2 className="text-center mb-4">Registro de Usuario</h2>
+    <section className="registro-section">
+      <h2>Registro de Usuario</h2>
       {enviado && <div className="alert alert-success">¡Registro exitoso!</div>}
-      <form className="mx-auto" style={{maxWidth: 500}} onSubmit={handleSubmit} noValidate>
-        <div className="mb-3">
-          <label className="form-label">Nombre</label>
-          <input type="text" className={`form-control ${errores.nombre ? 'is-invalid' : ''}`} name="nombre" value={form.nombre} onChange={handleChange} maxLength={50} />
+      <form className="registro-form" onSubmit={handleSubmit} noValidate>
+        <label>
+          Nombre
+          <input type="text" className={`form-control ${errores.nombre ? 'is-invalid' : ''}`} name="nombre" value={form.nombre} onChange={handleChange} placeholder="Tu nombre" maxLength={50} required />
           {errores.nombre && <div className="invalid-feedback">{errores.nombre}</div>}
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Apellidos</label>
-          <input type="text" className={`form-control ${errores.apellidos ? 'is-invalid' : ''}`} name="apellidos" value={form.apellidos} onChange={handleChange} maxLength={100} />
+        </label>
+        <label>
+          Apellidos
+          <input type="text" className={`form-control ${errores.apellidos ? 'is-invalid' : ''}`} name="apellidos" value={form.apellidos} onChange={handleChange} placeholder="Tus apellidos" maxLength={100} required />
           {errores.apellidos && <div className="invalid-feedback">{errores.apellidos}</div>}
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Correo</label>
-          <input type="email" className={`form-control ${errores.correo ? 'is-invalid' : ''}`} name="correo" value={form.correo} onChange={handleChange} maxLength={100} />
+        </label>
+        <label>
+          Correo
+          <input type="email" className={`form-control ${errores.correo ? 'is-invalid' : ''}`} name="correo" value={form.correo} onChange={handleChange} placeholder="tu@email.com" maxLength={100} required />
           {errores.correo && <div className="invalid-feedback">{errores.correo}</div>}
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Contraseña</label>
-          <input type="password" className={`form-control ${errores.password ? 'is-invalid' : ''}`} name="password" value={form.password} onChange={handleChange} maxLength={10} />
+        </label>
+        <label>
+          Contraseña
+          <input type="password" className={`form-control ${errores.password ? 'is-invalid' : ''}`} name="password" value={form.password} onChange={handleChange} placeholder="Contraseña" maxLength={10} required />
           {errores.password && <div className="invalid-feedback">{errores.password}</div>}
-        </div>
+        </label>
         <button type="submit" className="btn btn-warning">Registrarse</button>
       </form>
     </section>

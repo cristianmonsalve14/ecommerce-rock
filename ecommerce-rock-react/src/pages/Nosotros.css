@@ -1,0 +1,61 @@
+.nosotros-section {
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  border-radius: 10px;
+}
+
+.nosotros-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.nosotros-desc {
+  text-align: center;
+  color: #555;
+  margin-bottom: 2.5rem;
+  font-size: 1.15rem;
+}
+
+.nosotros-equipo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.equipo-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  width: 220px;
+  transition: transform 0.2s;
+}
+
+.equipo-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(243,156,18,0.15);
+}
+
+.equipo-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 3px solid #f39c12;
+}
+
+.equipo-card h3 {
+  margin: 0.5rem 0 0.2rem 0;
+  color: #f39c12;
+}
+
+.equipo-card p {
+  color: #666;
+  font-size: 0.98rem;
+}

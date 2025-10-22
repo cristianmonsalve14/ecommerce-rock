@@ -1,0 +1,47 @@
+.navbar {
+  background: #181a1b;
+  color: #fff;
+  padding: 1.1rem 2rem 1.1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 18px #a21caf55;
+  border-bottom: 2px solid #7c3aed;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  font-family: 'Rock Salt', cursive, sans-serif;
+  font-size: 1.7rem;
+  color: #fff;
+  text-shadow: 0 0 12px #a21cafcc, 0 1px 0 #000a;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  color: #fff;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.08rem;
+  transition: color 0.2s, text-shadow 0.2s;
+  text-shadow: 0 0 8px #a21caf55;
+}
+
+.navbar-links a:hover {
+  color: #c084fc;
+  text-shadow: 0 0 18px #a21cafcc;
+}

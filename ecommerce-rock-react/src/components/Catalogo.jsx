@@ -1,45 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getProductos } from '../data/dataProductos';
 
-function Catalogo() {
+function Catalogo({ onAddToCart }) {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    setProductos(getProductos());
+  }, []);
+
   return (
     <section id="catalogo" className="container py-5">
       <h2 className="text-center mb-4">Nuestro Catálogo</h2>
       <div className="row" id="productos-lista">
-        {/* Producto 1 */}
-        <div className="col-12 col-md-6 col-xl-6 mb-4">
-          <div className="card product-card h-100">
-            <img src="/img/deep-purple.jpg" className="card-img-top" alt="Polera Deep Purple" />
-            <div className="card-body">
-              <h5 className="card-title">Polera Deep Purple</h5>
-              <p className="card-text">Polera de rock de alta calidad con diseño exclusivo inspirado en Deep Purple.</p>
-              <ul>
-                <li>Material: Algodón 100%</li>
-                <li>Color: Negro</li>
-                <li>Tamaño: S, M, L, XL</li>
-              </ul>
-              <p><em>Grupo: Deep Purple</em></p>
-              <button className="btn btn-warning add-to-cart-btn">Añadir al Carrito</button>
+        {productos.map(producto => (
+          <div className="col-12 col-md-6 col-xl-4 mb-4" key={producto.id}>
+            <div className="card product-card h-100 shadow-sm">
+              <img src={producto.imagen} className="card-img-top" alt={producto.nombre} />
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title">{producto.nombre}</h5>
+                <p className="card-text">{producto.descripcion}</p>
+                <ul className="mb-2">
+                  <li>Precio: <strong>${producto.precio.toLocaleString()}</strong></li>
+                  <li>Stock: {producto.stock}</li>
+                </ul>
+                <button
+                  className="btn btn-warning mt-auto"
+                  onClick={() => onAddToCart && onAddToCart(producto)}
+                  disabled={producto.stock === 0}
+                >
+                  {producto.stock === 0 ? 'Sin stock' : 'Añadir al Carrito'}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        {/* Producto 2 */}
-        <div className="col-12 col-md-6 col-xl-6 mb-4">
-          <div className="card product-card h-100">
-            <img src="/img/guns-roses.jpg" className="card-img-top" alt="Polera Guns N' Roses" />
-            <div className="card-body">
-              <h5 className="card-title">Polera Guns N' Roses</h5>
-              <p className="card-text">Polera con el icónico diseño de Guns N' Roses.</p>
-              <ul>
-                <li>Material: Algodón 100%</li>
-                <li>Color: Blanco</li>
-                <li>Tamaño: S, M, L, XL</li>
-              </ul>
-              <p><em>Grupo: Guns N' Roses</em></p>
-              <button className="btn btn-warning add-to-cart-btn">Añadir al Carrito</button>
-            </div>
-          </div>
-        </div>
-        {/* Puedes agregar más productos aquí */}
+        ))}
       </div>
     </section>
   );
