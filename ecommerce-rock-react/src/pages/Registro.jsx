@@ -6,7 +6,7 @@ function RegistroPage() {
   return (
     <Layout>
       <section className="registro-section">
-        <h2>Registro de Usuario</h2>
+        <h2></h2>
         <Registro />
       </section>
     </Layout>

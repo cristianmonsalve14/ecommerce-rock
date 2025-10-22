@@ -6,7 +6,7 @@ function LoginPage({ onLogin }) {
   return (
     <Layout>
       <section className="login-section">
-        <h2>Iniciar Sesión</h2>
+        <h2></h2>
         <Login onLogin={onLogin} />
       </section>
     </Layout>

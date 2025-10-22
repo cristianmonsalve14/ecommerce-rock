@@ -23,6 +23,14 @@ function Home() {
           <section className="hero-section">
             <Hero />
           </section>
+          <section className="hero poleras-img-section">
+            <img src="/img/poleras.avif" alt="Poleras de Rock" className="hero-poleras-img" />
+            <div className="hero-poleras-text">
+              <h2>¡Exprésate con Estilo!</h2>
+              <p>Descubre las poleras más icónicas del rock, calidad premium y diseños exclusivos para verdaderos fans. ¡Haz tu pedido hoy y lleva el espíritu del rock en tu outfit!</p>
+              <a href="/catalogo" className="btn hero-poleras-btn">Visita nuestro catálogo</a>
+            </div>
+          </section>
         </main>
         <BlogAside />
       </div>

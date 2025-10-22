@@ -11,17 +11,17 @@ function NosotrosPage() {
         </p>
         <div className="nosotros-equipo">
           <div className="equipo-card">
-            <img src="/img/iron-maiden.jpg" alt="Equipo 1" />
+            <img src="/img/camila.jpg" alt="Camila" />
             <h3>Camila</h3>
             <p>Fundadora & Diseñadora</p>
           </div>
           <div className="equipo-card">
-            <img src="/img/metallica.jpg" alt="Equipo 2" />
+            <img src="/img/benjamin.jpg" alt="Benjamín" />
             <h3>Benjamín</h3>
             <p>Atención al Cliente</p>
           </div>
           <div className="equipo-card">
-            <img src="/img/red-hot-chili-peppers.jpg" alt="Equipo 3" />
+            <img src="/img/valentina.jpg" alt="Valentina" />
             <h3>Valentina</h3>
             <p>Marketing & RRSS</p>
           </div>
