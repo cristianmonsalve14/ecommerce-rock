@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import './Registro.css';
+import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Registro() {
   const [form, setForm] = useState({ nombre: '', apellidos: '', correo: '', password: '' });
   const [errores, setErrores] = useState({});
   const [enviado, setEnviado] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const validar = () => {
     const errores = {};
@@ -12,7 +16,7 @@ function Registro() {
     if (!form.apellidos) errores.apellidos = "Los apellidos son requeridos";
     if (!form.correo) {
       errores.correo = "El correo es requerido";
-    } else if (!/^[\w-.]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/.test(form.correo)) {
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/.test(form.correo)) {
       errores.correo = "Correo no válido";
     }
     if (!form.password) {
@@ -33,7 +37,10 @@ function Registro() {
     const val = validar();
     if (Object.keys(val).length === 0) {
       setEnviado(true);
+      // Simular usuario autenticado tras registro
+      login({ correo: form.correo, nombre: form.nombre });
       setForm({ nombre: '', apellidos: '', correo: '', password: '' });
+      setTimeout(() => navigate('/blog'), 1000);
     } else {
       setErrores(val);
     }

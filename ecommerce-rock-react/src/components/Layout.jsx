@@ -1,4 +1,5 @@
 // src/components/Layout.jsx
+import React from 'react';
 import './Layout.css';
 
 function Layout({ children }) {

@@ -1,3 +1,4 @@
+import React from 'react';
 import Layout from '../components/Layout';
 import './Blog.css';
 import BlogSocialIcons from './BlogSocialIcons';

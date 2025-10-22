@@ -34,6 +34,11 @@ function Home() {
         </main>
         <BlogAside />
       </div>
+      <section className="home-incentivo-registro" style={{background:'#18191a',color:'#ffd700',padding:'2rem',borderRadius:'1rem',margin:'2rem 0',boxShadow:'0 2px 12px #0008',textAlign:'center'}}>
+        <h2 style={{fontWeight:'bold',fontSize:'2rem',marginBottom:'1rem'}}>¡Participa y Gana!</h2>
+        <p style={{fontSize:'1.2rem',color:'#fff'}}>Regístrate gratis para unirte a los debates y responder la <strong>pregunta del día</strong>. ¡Podrás ganar <span style={{color:'#ffd700'}}>descuentos exclusivos</span> y premios como <span style={{color:'#ffd700'}}>poleras de tus bandas favoritas</span>!</p>
+        <a href="/registro" className="btn btn-warning mt-3" style={{fontWeight:'bold',fontSize:'1.1rem'}}>Crear cuenta y participar</a>
+      </section>
     </Layout>
   );
 }

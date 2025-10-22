@@ -6,10 +6,11 @@ El proyecto fue desarrollado utilizando **React**, un framework moderno de JavaS
 
 ## 2. Desarrollo de Componentes React: Gestión de Props y Estado
 
-Cada sección principal del sitio (Catálogo, Carrito, Blog, Nosotros, Contacto, Registro, Login) se implementó como un componente React independiente. 
+Cada sección principal del sitio (Catálogo, Carrito, Blog, Nosotros, Contacto, Registro, Login), así como paneles de usuario y administración, se implementó como un componente React independiente.
 
 - **Props:** Se utilizan para pasar datos y funciones entre componentes. Por ejemplo, el componente `Catalogo` recibe la función `onAddToCart` como prop para añadir productos al carrito.
 - **Estado:** Se gestiona con el hook `useState` para manejar información dinámica, como la lista de productos, el contenido del carrito o los mensajes de confirmación.
+- **Contextos:** Se emplea Context API para la autenticación y el manejo global del carrito y descuentos.
 
 **Ejemplo en `Catalogo.jsx`:**
 ```jsx
@@ -23,9 +24,9 @@ Esto permite que la interfaz reaccione automáticamente a las acciones del usuar
 - El estado (`useState`) permite que los componentes reaccionen a cambios y actualicen la UI dinámicamente.
 - Se asegura así un funcionamiento correcto y personalizado de cada parte de la aplicación.
 
-## 3. Implementación de Diseño Responsivo con Bootstrap
+## 3. Implementación de Diseño Responsivo y Experiencia Visual
 
-Para asegurar que la aplicación sea usable en cualquier dispositivo, se integró **Bootstrap** junto con CSS personalizado.
+Para asegurar que la aplicación sea usable en cualquier dispositivo, se integró **Bootstrap** junto con CSS personalizado y animaciones visuales.
 
 - Se emplean clases de Bootstrap como `container`, `row`, `col`, `btn`, etc., para estructurar y estilizar los componentes.
 - El catálogo de productos utiliza un grid responsivo:
@@ -46,12 +47,14 @@ Para asegurar que la aplicación sea usable en cualquier dispositivo, se integr�
   }
 }
 ```
-- Los formularios y botones también usan clases Bootstrap para adaptarse a pantallas pequeñas y grandes.
+- Navbar responsiva con menú hamburguesa y botón de carrito animado.
+- Modal de carrito flotante, animado y con blur.
+- Footer con íconos de redes sociales animados y visual dark/rockero.
+- Scroll automático al top en cada navegación.
 
 **Ejemplo de visualización responsiva:**
-- En un computador, el catálogo muestra 3 productos por fila; en tablet, 2; y en móvil, 1, asegurando una experiencia óptima en todos los dispositivos.
-- La Navbar se transforma en menú hamburguesa en móviles.
-- El aside de noticias y las tarjetas se adaptan a diferentes anchos de pantalla.
+- En computador, el catálogo muestra 3 productos por fila; en tablet, 2; y en móvil, 1.
+- Navbar y aside se adaptan a diferentes anchos de pantalla.
 
 ---
 

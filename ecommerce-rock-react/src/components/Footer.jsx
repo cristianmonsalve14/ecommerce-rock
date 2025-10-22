@@ -4,6 +4,11 @@ import './Footer.css';
 function Footer() {
   return (
     <footer className="footer">
+      <div className="footer-float-icons">
+        <img src="/img/polera-algodon.jpg" alt="Polera" className="footer-float polera" />
+        <img src="/img/guitarra.jpg" alt="Guitarra" className="footer-float guitarra" />
+        <img src="/img/rockandroll.jpg" alt="Rock" className="footer-float rock" />
+      </div>
       <div className="footer-content">
         <div className="footer-social">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">

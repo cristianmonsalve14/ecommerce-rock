@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -12,13 +12,23 @@ import RegistroPage from './pages/Registro';
 import ContactoPage from './pages/Contacto';
 import NosotrosPage from './pages/Nosotros';
 import BlogPage from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import PanelUsuario from './pages/PanelUsuario';
+import ProtectedRoute from './components/ProtectedRoute';
+import { useAuth } from './components/AuthContext';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
+  return null;
+}
 
 function App() {
   const [carrito, setCarrito] = useState([]);
   const [showCarrito, setShowCarrito] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(() => {
-    return localStorage.getItem('isAdmin') === 'true';
-  });
+  const { user } = useAuth();
 
   useEffect(() => {
     const data = localStorage.getItem('carrito');
@@ -57,56 +67,47 @@ function App() {
     setCarrito([]);
   };
 
-  const handleLogin = (correo, password) => {
-    if (correo === 'admin@admin.com' && password === 'admin123') {
-      setIsAdmin(true);
-      localStorage.setItem('isAdmin', 'true');
-      return true;
-    }
-    return false;
-  };
-
-  const handleLogout = () => {
-    setIsAdmin(false);
-    localStorage.removeItem('isAdmin');
-  };
-
   return (
-    <BrowserRouter>
-      <div className="app-layout">
-        <Navbar isAdmin={isAdmin} onLogout={handleLogout} />
-        <main className="main-content">
-          <Layout>
-            <button
-              className="btn btn-outline-warning mb-3"
-              style={{ float: 'right' }}
-              onClick={() => setShowCarrito(!showCarrito)}
-            >
-              🛒 Carrito ({carrito.reduce((acc, item) => acc + item.cantidad, 0)})
-            </button>
-            {showCarrito && (
-              <Carrito
-                carrito={carrito}
-                onRemove={handleRemoveFromCart}
-                onClear={handleClearCart}
-                onCheckout={handleCheckout}
-              />
-            )}
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/catalogo" element={<CatalogoPage onAddToCart={handleAddToCart} />} />
-              <Route path="/admin" element={isAdmin ? <AdminPanel /> : <Navigate to="/login" replace />} />
-              <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-              <Route path="/registro" element={<RegistroPage />} />
-              <Route path="/contacto" element={<ContactoPage />} />
-              <Route path="/nosotros" element={<NosotrosPage />} />
-              <Route path="/blog" element={<BlogPage />} />
-            </Routes>
-          </Layout>
-        </main>
+    <>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Navbar onCarritoClick={() => setShowCarrito(true)} carritoCount={carrito.reduce((acc, item) => acc + item.cantidad, 0)} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalogo" element={<CatalogoPage onAddToCart={handleAddToCart} />} />
+          <Route path="/admin" element={user && user.correo === 'admin@admin.com' ? <AdminPanel /> : <Navigate to="/login" replace />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registro" element={<RegistroPage />} />
+          <Route path="/contacto" element={<ContactoPage />} />
+          <Route path="/nosotros" element={<NosotrosPage />} />
+          <Route path="/blog" element={
+            <ProtectedRoute>
+              <BlogPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/blog/:id" element={
+            <ProtectedRoute>
+              <BlogPost />
+            </ProtectedRoute>
+          } />
+          <Route path="/usuario" element={
+            <ProtectedRoute>
+              <PanelUsuario />
+            </ProtectedRoute>
+          } />
+        </Routes>
         <Footer />
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+      {showCarrito && (
+        <Carrito
+          carrito={carrito}
+          onRemove={handleRemoveFromCart}
+          onClear={handleClearCart}
+          onCheckout={handleCheckout}
+          onClose={() => setShowCarrito(false)}
+        />
+      )}
+    </>
   );
 }
 

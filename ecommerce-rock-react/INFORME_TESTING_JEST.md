@@ -16,8 +16,34 @@ Para asegurar la calidad y correcto funcionamiento de los componentes del proyec
   - Se configuró el transformador de Babel para soportar JSX.
   - Se agregó un mapeo para ignorar archivos CSS.
 - Se agregó el script `"test:jest": "jest"` en `package.json` para ejecutar las pruebas fácilmente.
+- Se implementó un polyfill global de TextEncoder/TextDecoder para compatibilidad con Jest.
+- Se corrigió la configuración duplicada de Jest en `package.json`.
 
-## 2. Ejemplo de prueba unitaria realizada
+## 2. Componentes y pruebas cubiertas
+
+Se crearon archivos de test para los siguientes componentes principales:
+- Catalogo
+- Carrito
+- Login
+- Contacto
+- Registro
+- Navbar
+- Footer
+- PanelUsuario
+- AdminPanel
+- ProtectedRoute
+- Blog
+- BlogPost
+- Hero
+- BlogAside
+
+Las pruebas cubren:
+- Renderizado de títulos, formularios y productos
+- Validación de campos obligatorios y mensajes de error
+- Interacción con botones y funciones (ej: añadir al carrito)
+- Uso de contextos y routers en tests complejos
+
+## 3. Ejemplo de prueba unitaria realizada
 
 Se creó el archivo `src/components/Catalogo.test.jsx` para probar el componente `Catalogo`.
 
@@ -53,7 +79,7 @@ describe('Catalogo Component', () => {
 - **Renderiza productos:** Comprueba que se muestran imágenes de productos (al menos una).
 - **Función de añadir al carrito:** Simula un click en el botón "Añadir al Carrito" y verifica que se llama la función correspondiente.
 
-## 3. Ejecución de las pruebas
+## 4. Ejecución de las pruebas
 
 Para ejecutar las pruebas, se utiliza el comando:
 ```
@@ -61,10 +87,15 @@ npm run test:jest
 ```
 Esto ejecuta todas las pruebas y muestra el resultado en la terminal, indicando si los componentes funcionan correctamente.
 
-## 4. Beneficios del testing automatizado
+## 5. Beneficios del testing automatizado
 - Permite detectar errores antes de subir cambios al proyecto.
 - Garantiza que los componentes respondan correctamente a las acciones del usuario.
 - Facilita el mantenimiento y la calidad del código.
+- Permite refactorizar y agregar nuevas funcionalidades con confianza.
+
+## 6. Recomendaciones y próximos pasos
+- Seguir ampliando la cobertura con pruebas de integración y mocks complejos.
+- Mantener los tests actualizados ante cambios en la lógica o UI.
 
 ---
 

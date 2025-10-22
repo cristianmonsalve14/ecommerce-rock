@@ -39,18 +39,18 @@ function Contacto() {
       {enviado && <div className="alert alert-success">¡Mensaje enviado correctamente!</div>}
       <form className="mx-auto" style={{maxWidth: 500}} onSubmit={handleSubmit} noValidate>
         <div className="mb-3">
-          <label className="form-label">Nombre</label>
-          <input type="text" className={`form-control ${errores.nombre ? 'is-invalid' : ''}`} name="nombre" value={form.nombre} onChange={handleChange} maxLength={100} />
+          <label className="form-label" htmlFor="contacto-nombre">Nombre</label>
+          <input id="contacto-nombre" type="text" className={`form-control ${errores.nombre ? 'is-invalid' : ''}`} name="nombre" value={form.nombre} onChange={handleChange} maxLength={100} />
           {errores.nombre && <div className="invalid-feedback">{errores.nombre}</div>}
         </div>
         <div className="mb-3">
-          <label className="form-label">Correo</label>
-          <input type="email" className={`form-control ${errores.correo ? 'is-invalid' : ''}`} name="correo" value={form.correo} onChange={handleChange} maxLength={100} />
+          <label className="form-label" htmlFor="contacto-correo">Correo</label>
+          <input id="contacto-correo" type="email" className={`form-control ${errores.correo ? 'is-invalid' : ''}`} name="correo" value={form.correo} onChange={handleChange} maxLength={100} />
           {errores.correo && <div className="invalid-feedback">{errores.correo}</div>}
         </div>
         <div className="mb-3">
-          <label className="form-label">Mensaje</label>
-          <textarea className={`form-control ${errores.mensaje ? 'is-invalid' : ''}`} name="mensaje" value={form.mensaje} onChange={handleChange} maxLength={500} rows={4}></textarea>
+          <label className="form-label" htmlFor="contacto-mensaje">Mensaje</label>
+          <textarea id="contacto-mensaje" className={`form-control ${errores.mensaje ? 'is-invalid' : ''}`} name="mensaje" value={form.mensaje} onChange={handleChange} maxLength={500} rows={4}></textarea>
           {errores.mensaje && <div className="invalid-feedback">{errores.mensaje}</div>}
         </div>
         <button type="submit" className="btn btn-warning">Enviar</button>

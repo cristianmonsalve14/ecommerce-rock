@@ -1,15 +1,15 @@
-# React + Vite
+# E-commerce Poleras de Rock
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyecto de frontend profesional para la venta de poleras de rock, desarrollado en React. Incluye experiencia de usuario avanzada, diseño responsivo, paneles de usuario y administración, sistema de descuentos, blog interactivo y pruebas unitarias exhaustivas.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades principales
+- Catálogo de productos con filtros y búsqueda
+- Carrito de compras animado y modal profesional
+- Registro/login de usuarios con validaciones
+- Panel de usuario: historial, descuentos, premios
+- Panel de administración: gestión de productos, usuarios, descuentos y comentarios
+- Blog con comentarios, ranking, premios y pregunta del día
+- Animaciones visuales, scroll automático
 
 ## Expanding the ESLint configuration
 
