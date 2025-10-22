@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Catalogo from './components/Catalogo';
 import BlogAside from './components/BlogAside';
 import Footer from './components/Footer';
+import PanelAdmin from './components/PanelAdmin';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         </div>
       </div>
       <Footer />
+      <PanelAdmin />
     </>
   );
 }
