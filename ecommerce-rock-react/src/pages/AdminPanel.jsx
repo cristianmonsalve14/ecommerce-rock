@@ -3,8 +3,10 @@ import CrudProductos from '../components/CrudProductos';
 import CrudUsuarios from '../components/CrudUsuarios';
 import PreguntaAdmin from '../components/PreguntaAdmin';
 import RespuestasPreguntaAdmin from '../components/RespuestasPreguntaAdmin';
+import DashboardAdmin from '../components/DashboardAdmin';
 
 const iconos = {
+  dashboard: '📊',
   productos: '🛒',
   usuarios: '👤',
   descuentos: '💸',
@@ -13,9 +15,33 @@ const iconos = {
 };
 
 export default function AdminPanel() {
-  const [seccion, setSeccion] = useState('productos');
+  const [seccion, setSeccion] = useState('dashboard');
   const [descuentos, setDescuentos] = useState([]);
   const [comentarios, setComentarios] = useState([]);
+  // Datos simulados para el dashboard
+  const resumen = {
+    ventasTotales: 120,
+    masVendidos: [
+      { nombre: 'Polera Metallica', cantidad: 35 },
+      { nombre: 'Polera Iron Maiden', cantidad: 28 },
+      { nombre: 'Polera AC/DC', cantidad: 19 },
+    ],
+  };
+  const productos = [
+    { nombre: 'Polera Metallica' },
+    { nombre: 'Polera Iron Maiden' },
+    { nombre: 'Polera AC/DC' },
+  ];
+  const usuarios = [
+    { nombre: 'Admin' },
+    { nombre: 'Usuario1' },
+    { nombre: 'Usuario2' },
+  ];
+  const ventas = [
+    { id: 1, fecha: '2025-10-20', total: 19990 },
+    { id: 2, fecha: '2025-10-19', total: 14990 },
+    { id: 3, fecha: '2025-10-18', total: 29990 },
+  ];
 
   useEffect(() => {
     // Mostrar descuentos del usuario admin por defecto
@@ -52,6 +78,9 @@ export default function AdminPanel() {
             Panel de Administración
           </h2>
           <nav className="mb-4 d-flex flex-wrap gap-2">
+            <button className={`btn btn-${seccion === 'dashboard' ? 'warning' : 'outline-warning'} fw-bold`} onClick={() => setSeccion('dashboard')}>
+              {iconos.dashboard} Dashboard
+            </button>
             <button className={`btn btn-${seccion === 'productos' ? 'warning' : 'outline-warning'} fw-bold`} onClick={() => setSeccion('productos')}>
               {iconos.productos} Productos
             </button>
@@ -72,6 +101,11 @@ export default function AdminPanel() {
             </button>
           </nav>
           <div className="row g-4">
+            {seccion === 'dashboard' && (
+              <div className="col-12">
+                <DashboardAdmin resumen={resumen} productos={productos} usuarios={usuarios} ventas={ventas} />
+              </div>
+            )}
             {seccion === 'productos' && (
               <div className="col-12">
                 <div className="card bg-dark text-light shadow-lg border-warning">
